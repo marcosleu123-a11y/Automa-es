@@ -1,3 +1,38 @@
+# Arquivos gerados pelo Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# Planilhas de entrada/saída e arquivos do Excel
 *.xlsx
 *.xls
 *.xlsm
+*.csv
+~$*
+
+# Mantém as pastas vazias no Git
+!entrada/.gitkeep
+!saida/.gitkeep
+
+# Saídas geradas pelo automatizador
+saida/*
+!saida/.gitkeep
+
+# Entradas locais do usuário
+entrada/*
+!entrada/.gitkeep
+
+# Arquivos temporários e de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Configurações locais de editores
+.vscode/
+.idea/

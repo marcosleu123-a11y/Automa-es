@@ -513,8 +513,8 @@ def create_manager_workbook(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Cria uma aba por gerente usando a coluna D da planilha base.")
-    parser.add_argument("-i", "--input", type=Path, default=None, help="Arquivo .xlsx de entrada.")
-    parser.add_argument("-o", "--output", type=Path, default=None, help="Arquivo .xlsx de saida. Padrao: visitas_por_gerente.xlsx.")
+    parser.add_argument("-i", "--input", type=Path, default=None, help="Arquivo .xlsx de entrada. Padrao: planilha mais recente na pasta entrada.")
+    parser.add_argument("-o", "--output", type=Path, default=None, help="Arquivo .xlsx de saida. Padrao: saida/visitas_por_gerente.xlsx.")
     parser.add_argument("--header-row", type=int, default=1)
     parser.add_argument("--manager-column", type=int, default=4)
     parser.add_argument("--base-sheet-name", default="Base Total")
@@ -525,8 +525,10 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     script_folder = Path(__file__).resolve().parent
-    output_path = args.output or script_folder / "visitas_por_gerente.xlsx"
-    input_path = args.input or newest_input_file(script_folder, output_path.name)
+    input_folder = script_folder / "entrada"
+    output_folder = script_folder / "saida"
+    output_path = args.output or output_folder / "visitas_por_gerente.xlsx"
+    input_path = args.input or newest_input_file(input_folder, output_path.name)
 
     print(f"Planilha base usada: {input_path.resolve()}")
     sheet_names, manager_counts, saved_path = create_manager_workbook(
